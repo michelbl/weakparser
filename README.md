@@ -49,24 +49,26 @@ A `weakscraper` template is like a regular HTML file with some keywords to tell 
 `template.html`
 ```html
 <!DOCTYPE html>
-<head>
-  <title>Title</title>
-</head>
-<body attr1="val1" wp-name="body">
-  <div wp-name="content"/>
-</body>
+<html>
+    <head>
+        <title>Title</title>
+    </head>
+    <body attr1="val1" wp-name="body">
+        <div wp-name="content"/>
+    </body>
 </html>
 ```
 
 `webpage.html`
 ```html
 <!DOCTYPE html>
-<head>
-  <title>Title</title>
-</head>
-<body attr1="val1">
-  <div>Hi !</div>
-</body>
+<html>
+    <head>
+        <title>Title</title>
+    </head>
+    <body attr1="val1">
+        <div>Hi !</div>
+    </body>
 </html>
 ```
 
@@ -74,29 +76,24 @@ A `weakscraper` template is like a regular HTML file with some keywords to tell 
 ```python
 from weakscraper import WeakScraper
 
-f = open('template.html', 'r')
-template_string = f.read()
-f.close()
+
+with open('template.html') as f_template, open('webpage.html') as f_html:
+    template_string = f_template.read()
+    html_string = f_html.read()
 
 scraper = WeakScraper(template_string)
-
-f = open('webpage.html', 'r')
-html_string = f.read()
-f.close()
-
 result_data = scraper.scrap(html_string)
 
-f = open('output.json', 'w')
-f.write(json.dumps(result_data, ident=2))
-f.close()
+with open('output.json', 'w') as f:
+    f.write(json.dumps(result_data, ident=4))
 ```
 
 `output.json`
 ```json
 {
-  "body": {
-    "content": "Hi !"
-  }
+    "body": {
+        "content": "Hi !"
+    }
 }
 ```
 

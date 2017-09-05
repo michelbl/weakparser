@@ -52,6 +52,14 @@ class AssertCompleteFailure(ParsingError):
     pass
 
 
+class EndTagDiscrepancy(ParsingError):
+    pass
+
+
+class NodeTypeDiscrepancy(ParsingError):
+    pass
+
+
 class CompareError(Exception):
     def __init__(self, template, html):
         self.html = html
@@ -85,6 +93,7 @@ class CompareError(Exception):
         message += json.dumps(self.html, indent=2)
 
         return message
+
 
 class NodetypeError(CompareError):
     pass

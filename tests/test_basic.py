@@ -7,12 +7,13 @@ class TestBasic(unittest.TestCase):
     def setUp(self):
         template_string = """
             <!DOCTYPE html>
-            <head>
-              <title>Title</title>
-            </head>
-            <body attr1="val1" attr2="val2">
-              <div>Hi !</div>
-            </body>
+            <html>
+                <head>
+                    <title>Title</title>
+                </head>
+                <body attr1="val1" attr2="val2">
+                    <div>Hi !</div>
+                </body>
             </html>
             """
 
@@ -22,18 +23,19 @@ class TestBasic(unittest.TestCase):
     def test_match(self):
         content = """
             <!DOCTYPE html>
-            <head><title>Title
-              </title>
-            </head>
+            <html>
+                <head><title>Title
+                    </title>
+                </head>
 
 
-            <body attr2="val2" attr1="val1">
-            <div>
+                <body attr2="val2" attr1="val1">
+                <div>
 
-                Hi !
-              </div>
-            </body>
-              </html>
+                        Hi !
+                    </div>
+                </body>
+            </html>
             """
 
         result_data = self.scraper.scrap(content)
@@ -44,14 +46,15 @@ class TestBasic(unittest.TestCase):
     def test_datanomatch(self):
         content =  """
             <!DOCTYPE html>
-            <head>
-              <title>Title</title>
-            </head>
-            <body attr2="val2" attr1="val1">
-              <div>
-                Hello !
-              </div>
-            </body>
+            <html>
+                <head>
+                    <title>Title</title>
+                </head>
+                <body attr2="val2" attr1="val1">
+                    <div>
+                        Hello !
+                    </div>
+                </body>
             </html>
             """
 
@@ -66,14 +69,15 @@ class TestBasic(unittest.TestCase):
     def test_tagnomatch(self):
         content = """
             <!DOCTYPE html>
-            <head>
-              <title>Title</title>
-            </head>
-            <body attr2="val2" attr1="val1">
-              <q>
-                Hi !
-              </q>
-            </body>
+            <html>
+                <head>
+                    <title>Title</title>
+                </head>
+                <body attr2="val2" attr1="val1">
+                    <q>
+                        Hi !
+                    </q>
+                </body>
             </html>
             """
 
@@ -88,12 +92,13 @@ class TestBasic(unittest.TestCase):
     def test_attrnomatch(self):
         content = """
             <!DOCTYPE html>
-            <head>
-              <title>Title</title>
-            </head>
-            <body attr3="val1" attr2="val2">
-              <div>Hi !</div>
-            </body>
+            <html>
+                <head>
+                    <title>Title</title>
+                </head>
+                <body attr3="val1" attr2="val2">
+                    <div>Hi !</div>
+                </body>
             </html>
             """
 
