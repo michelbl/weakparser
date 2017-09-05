@@ -318,17 +318,21 @@ class Template:
             results[name] = self._f(html['children'])
         elif 'wp-ignore-content' not in self.params:
             if 'wp-name' in self.params:
-                name = self.params['wp-name']
-                if len(html['children']) == 0:
-                    content = ''
-                elif len(html['children']) == 1:
-                    html_child = html['children'][0]
-                    if html_child['nodetype'] != 'text':
-                        raise TextExpectedError(self, html_child)
-                    content = html_child['content']
-                else:
-                    raise NonAtomicChildError(self, html)
-                results[name] = self._f(content)
+                try:
+                    name = self.params['wp-name']
+                    if len(html['children']) == 0:
+                        content = ''
+                    elif len(html['children']) == 1:
+                        html_child = html['children'][0]
+                        if html_child['nodetype'] != 'text':
+                            raise TextExpectedError(self, html_child)
+                        content = html_child['content']
+                    else:
+                        raise NonAtomicChildError(self, html)
+                    results[name] = self._f(content)
+                except NonAtomicChildError:
+                    # html['children']与tpl['children']不匹配
+                    results[name] = html['children']
             else:
                 assert('children' not in html)
 
