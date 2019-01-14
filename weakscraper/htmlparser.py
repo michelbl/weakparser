@@ -95,7 +95,7 @@ class HtmlParser(html.parser.HTMLParser):
         pass
 
     def handle_decl(self, decl):
-        self.handle_starttag('html', [('wp-decl', None)])
+        self.handle_starttag(tag='html', attrs=[('wp-decl', None)])
 
     def handle_pi(self, decl):
         raise AssertionError('PI.')
